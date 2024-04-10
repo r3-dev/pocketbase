@@ -49,12 +49,11 @@ func (p *DonationAlerts) FetchAuthUser(token *oauth2.Token) (*AuthUser, error) {
 
 	extracted := struct {
 		Data struct {
-			Id          int    `json:"id"`
-			UniqueName  string `json:"code"`
-			Name        string `json:"name"`
-			Avatar      string `json:"avatar"`
-			Email       string `json:"email"`
-			SocketToken string `json:"socket_connection_token"`
+			Id         int    `json:"id"`
+			UniqueName string `json:"code"`
+			Name       string `json:"name"`
+			Avatar     string `json:"avatar"`
+			Email      string `json:"email"`
 		} `json:"data"`
 	}{}
 	if err := json.Unmarshal(data, &extracted); err != nil {
