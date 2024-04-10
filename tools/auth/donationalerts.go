@@ -65,6 +65,7 @@ func (p *DonationAlerts) FetchAuthUser(token *oauth2.Token) (*AuthUser, error) {
 		Id:           strconv.Itoa(extracted.Data.Id),
 		Name:         extracted.Data.UniqueName,
 		Username:     extracted.Data.Name,
+		Email:        extracted.Data.Email,
 		AvatarUrl:    extracted.Data.Avatar,
 		RawUser:      rawUser,
 		AccessToken:  token.AccessToken,
