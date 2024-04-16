@@ -243,4 +243,13 @@ func TestNewProviderByName(t *testing.T) {
 	if _, ok := p.(*auth.Planningcenter); !ok {
 		t.Error("Expected to be instance of *auth.Planningcenter")
 	}
+
+	// donationalerts
+	p, err = auth.NewProviderByName(auth.NameDonationAlerts)
+	if err != nil {
+		t.Errorf("Expected nil, got error %v", err)
+	}
+	if _, ok := p.(*auth.DonationAlerts); !ok {
+		t.Error("Expected to be instance of *auth.DonationAlerts")
+	}
 }

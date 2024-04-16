@@ -82,6 +82,8 @@ func TestSettingsValidate(t *testing.T) {
 	s.BitbucketAuth.ClientId = ""
 	s.PlanningcenterAuth.Enabled = true
 	s.PlanningcenterAuth.ClientId = ""
+	s.DonationAlertsAuth.Enabled = true
+	s.DonationAlertsAuth.ClientId = ""
 
 	// check if Validate() is triggering the members validate methods.
 	err := s.Validate()
@@ -127,6 +129,7 @@ func TestSettingsValidate(t *testing.T) {
 		`"mailcowAuth":{`,
 		`"bitbucketAuth":{`,
 		`"planningcenterAuth":{`,
+		`"donationAlertsAuth":{`,
 	}
 
 	errBytes, _ := json.Marshal(err)
@@ -208,6 +211,8 @@ func TestSettingsMerge(t *testing.T) {
 	s2.BitbucketAuth.ClientId = "bitbucket_test"
 	s2.PlanningcenterAuth.Enabled = true
 	s2.PlanningcenterAuth.ClientId = "planningcenter_test"
+	s2.DonationAlertsAuth.Enabled = true
+	s2.DonationAlertsAuth.ClientId = "donationalerts_test"
 
 	if err := s1.Merge(s2); err != nil {
 		t.Fatal(err)
@@ -302,6 +307,7 @@ func TestSettingsRedactClone(t *testing.T) {
 	s1.MailcowAuth.ClientSecret = testSecret
 	s1.BitbucketAuth.ClientSecret = testSecret
 	s1.PlanningcenterAuth.ClientSecret = testSecret
+	s1.DonationAlertsAuth.ClientSecret = testSecret
 
 	s1Bytes, err := json.Marshal(s1)
 	if err != nil {
@@ -364,6 +370,7 @@ func TestNamedAuthProviderConfigs(t *testing.T) {
 	s.MailcowAuth.ClientId = "mailcow_test"
 	s.BitbucketAuth.ClientId = "bitbucket_test"
 	s.PlanningcenterAuth.ClientId = "planningcenter_test"
+	s.DonationAlertsAuth.ClientId = "donationalerts_test"
 
 	result := s.NamedAuthProviderConfigs()
 
@@ -399,6 +406,7 @@ func TestNamedAuthProviderConfigs(t *testing.T) {
 		`"mailcow":{"enabled":false,"clientId":"mailcow_test"`,
 		`"bitbucket":{"enabled":false,"clientId":"bitbucket_test"`,
 		`"planningcenter":{"enabled":false,"clientId":"planningcenter_test"`,
+		`"donationalerts":{"enabled":false,"clientId":"donationalerts_test"`,
 	}
 	for _, p := range expectedParts {
 		if !strings.Contains(encodedStr, p) {
